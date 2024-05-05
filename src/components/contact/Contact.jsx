@@ -1,6 +1,7 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import './contact.scss'
 import { motion, useInView } from 'framer-motion'
+import emailjs from '@emailjs/browser';
 
 const variants = {
     initial: {
@@ -20,8 +21,28 @@ const variants = {
 const Contact = () => {
 
     const ref = useRef()
+    const formRef = useRef()
+    const [error, setError] = useState(false)
+    const [success, setSuccess] = useState(false)
 
     const isInView = useInView(ref)
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+    
+        emailjs
+          .sendForm('service_d0r0l5t', 'template_636u1xa', formRef.current, {
+            publicKey: 'LAyOUSIJ6IGkc_FGF',
+          })
+          .then(
+            () => {
+              setSuccess(true);
+            },
+            (error) => {
+              setError(true);
+            },
+          );
+      };
   return (
     <motion.div ref={ref} className='contact' variants={variants} initial='initial' whileInView='animate'>
         <motion.div className="textContainer" variants={variants}>
@@ -71,12 +92,14 @@ const Contact = () => {
                 </svg>
                 </motion.div>
             </motion.div>
-            <motion.form initial={{opacity:0}} whileInView={{opacity:1}} transition={{delay:4, duration: 1}}>
-                <input type="text" required placeholder="Name"/>
-                <input type="email" required placeholder="Email"/>
+            <motion.form ref={formRef} initial={{opacity:0}} onSubmit={sendEmail} whileInView={{opacity:1}} transition={{delay:4, duration: 1}}>
+                <input type="text" required placeholder="Name" name='name'/>
+                <input type="email" required placeholder="Email" name='email'/>
                 <input type="text" required placeholder="Subject"/>
-                <textarea name="" id="" rows="6" placeholder="Message"></textarea>
+                <textarea id="" rows="6" placeholder="Message" name='message'></textarea>
                 <button>Send Message</button>
+                {error && 'Error'}
+                {success && 'Success'}
             </motion.form>
         </div>
     </motion.div>
