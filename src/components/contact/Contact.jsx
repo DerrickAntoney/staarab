@@ -29,10 +29,11 @@ const Contact = () => {
 
     const sendEmail = (e) => {
         e.preventDefault();
+        console.log('clicked')
     
         emailjs
-          .sendForm('service_d0r0l5t', 'template_636u1xa', formRef.current, {
-            publicKey: 'LAyOUSIJ6IGkc_FGF',
+          .sendForm(import.meta.env.VITE_PUBLIC_SERVICE_ID, import.meta.env.VITE_PUBLIC_TEMPLATE_ID, formRef.current, {
+            publicKey: import.meta.env.VITE_PUBLIC_PUBLIC_KEY,
           })
           .then(
             () => {
