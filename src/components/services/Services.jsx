@@ -30,11 +30,11 @@ const Services = () => {
     <motion.div className='services' variants={variants} initial='initial' 
     //whileInView='animate'
     ref={ref} animate={isInView && 'animate'}>
-        <motion.div className='textContainer' variants={variants}>
+        <div className='textContainer'>
             <p>We focus on helping your brand grow
                 <br/> and move forward</p>
             <hr/>
-        </motion.div>
+        </div>
         <motion.div className='titleContainer' variants={variants}>
             <div className="title">
                 <img src="/people.webp" alt="" />

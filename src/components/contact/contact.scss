@@ -1,3 +1,5 @@
+@import '../../app.scss';
+
 .contact {
     height: 100%;
     max-width: 1200px;
@@ -6,11 +8,25 @@
     align-items: center;
     gap: 40px;
 
+    @include mobile {
+        width: 100%;
+        padding: 10px;
+        flex-direction: column;
+
+    }
+
     .textContainer {
         flex: 1;
         display: flex;
         flex-direction: column;
         gap: 30px;
+
+        @include mobile {
+            align-self: center;
+            text-align: center;
+            flex-direction: column;
+            gap: 20px;
+        }
 
         h1{
             font-size: 75px;
@@ -42,6 +58,11 @@
                 border: 1px solid #31d2b1;
                 outline: none;
                 color: white;
+
+                @include mobile {
+                    padding: 15px;
+        
+                }
             }
 
             textarea {
@@ -52,6 +73,11 @@
                 border: 1px solid #31d2b1;
                 outline: none;
                 color: white;
+
+                @include mobile {
+                    padding: 15px;
+        
+                }
             }
 
             button {
